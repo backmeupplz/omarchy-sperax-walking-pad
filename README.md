@@ -24,11 +24,7 @@ If your pad uses a different Bluetooth name, set `WALKING_PAD_NAME` in the envir
 ## Requirements
 
 - Bluetooth turned on (`bluez`)
-- `python-bleak` (the plugin runs a small Python helper for Bluetooth)
-
-```bash
-omarchy pkg add python-bleak
-```
+- The `python-bleak` package from the official Arch repos. The plugin runs a small Python helper for Bluetooth.
 
 ## Install
 
