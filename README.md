@@ -2,6 +2,8 @@
 
 An [Omarchy](https://omarchy.org) shell plugin for the Sperax RM-01 walking pad and its rebadged versions (sold as Freepi and others). It talks to the pad over Bluetooth, so you don't need the phone app.
 
+![Panel](preview.png)
+
 - Today's step count next to a walker icon in the bar
 - A panel with a start/stop switch, current speed, and today's steps, distance and time
 - Speed control from 0.2 to 4.0 km/h in 0.1 steps (slider, −/+ buttons, or keys)
