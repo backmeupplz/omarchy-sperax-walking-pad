@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "io.github.backmeupplz.sperax-walking-pad",
   "name": "Sperax Walking Pad",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "backmeupplz",
   "license": "MIT",
   "description": "Start, stop and set the speed of a Sperax RM-01 (and rebadged, e.g. Freepi) walking pad over Bluetooth, with today's steps in the bar and a 7-day history.",

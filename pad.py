@@ -75,7 +75,11 @@ def split_frames(buf):
         if start != -1:
             frames.append(buf[start:end + 1])
         buf = buf[end + 1:]
-    return frames, buf
+    # Only a partial frame (from its F5) is worth keeping, and a real one is
+    # well under 512 bytes even fully stuffed; drop anything else so a pad
+    # that never sends FA can't grow the buffer.
+    start = buf.rfind(0xF5)
+    return frames, buf[start:] if start != -1 and len(buf) - start < 512 else b""
 
 
 def parse(cmd, d):
@@ -258,7 +262,9 @@ def selftest():
     # Captured from a real pad: a stuffed status frame split across two
     # notifications, then the telemetry at the end of a 1:57 / 98-step walk.
     got, rest = split_frames(bytes.fromhex("121314f509000e00f00c9a"))
-    assert got == [] and rest
+    assert got == [] and rest == bytes.fromhex("f509000e00f00c9a")
+    assert split_frames(b"\x00" * 4096) == ([], b"")
+    assert split_frames(b"\xf5" + b"\x00" * 4096) == ([], b"")
     got, _ = split_frames(rest + bytes.fromhex("fa" "f519001900000200010075000300040062000000008ff00afa"))
     assert unstuff(got[0]) == (0x0E, b"\x00")
     t = parse(*unstuff(got[1]))
